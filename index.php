@@ -15,7 +15,7 @@
   <script src="js/libs/modernizr-2.5.3.min.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Reenie+Beanie' rel='stylesheet' type='text/css' />
   <link rel="stylesheet/less" href="css/style.less" type="text/css" />
-  <script type="text/javascript" src="js/less-1.0.35.min.js"></script>
+  <script type="text/javascript" src="js/libs/less-1.3.0.min.js"></script>
   <script type="text/javascript">
     // less.env = "development";
     // less.watch();
@@ -38,7 +38,6 @@
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
 
-  <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/pad.js"></script>
   <script type="text/javascript" src="js/draw.js"></script>
   <script type="text/javascript" src="js/linory.js"></script>
