@@ -1,77 +1,61 @@
 @import "definitions.less";
 
-@designPadWidth: 681px;
-@designPadHeight: 600px;
-
+@padWidth: 800px;
+@padHeight: 600px;
+@padPadding: 0px;
 
 html
 {
-    background-color: #fff;
+    background-color: #555;
 }
 
-body 
+body
 {
+    width: 800px;
+    margin: 40px auto;
     text-align: left;
-    overflow: auto;
 }
 
 header
 {
-    color: #fff;
+    position: fixed;
+    top: 0px;
+    width: @padWidth;
     height: 20px;
     line-height: 18px;
-    padding: 2px 2px 2px 2px;
-    background-color: #cdcdcd;
-    margin: 0 0 10px 0;
-    width: 100%;
-    min-width: (@designPadWidth + 20px);
-    position: fixed;
-    display: none;
+    padding: 2px @padPadding 2px @padPadding;
 
-    .author
+    color: #fff;
+    background-color: #222;
+
+    h1
     {
         display: inline-block;
         font-size: 14px;
     }
-    
-    h1
-    {
-        display: inline-block;
-        margin-left: 100px;
-        font-weight: bold;
-        font-size: 16px;
-    }
-    
-    #status
-    {
-        display: inline-block;
-        position: absolute;
-        right: 2px;
-        top: 2px;
-        visibility: hidden;
-    }
 }
 
-article.adroitJournal
+article.linory
 {
     margin: 0;
-    padding: 10px 10px 10px 10px;
+    padding: 0 @padPadding 0 @padPadding;
     white-space: nowrap;
-    position: absolute;
-    top: 30px;
-    min-width: (@designPadWidth + 20px);
-    min-height: (@designPadHeight + 20px);
 
-    section.designPad
+    position: absolute;
+
+    width: @padWidth;
+    height: @padHeight;
+
+    section.pad
     {
-        background-color: #faf7ee;
-        .boxShadow(3px,3px,5px, #ccc);
+        background-color: #fff;
+        // .boxShadow(3px,3px,5px, #ccc);
         .roundedCorners(4px);
         display: inline-block;
-        padding: 3px 3px 3px 3px;
-        margin: 0 6px 0 3px;
-        width: @designPadWidth;
-        height: @designPadHeight;
+        padding: 0;
+        margin: 0;
+        width: @padWidth;
+        height: @padHeight;
 
         .textLayer
         {
@@ -79,8 +63,8 @@ article.adroitJournal
             z-index: 300;
             font-family: 'Reenie Beanie', helvetica, arial, sans-serif; 
             font-size: 26px;
-            width: @designPadWidth;
-            height: @designPadHeight;
+            width: @padWidth;
+            height: @padHeight;
             outline: none;
             color: #555;
         }
@@ -89,8 +73,8 @@ article.adroitJournal
         {
             position: absolute;
             z-index: 400;
-            width: @designPadWidth;
-            height: @designPadHeight;
+            width: @padWidth;
+            height: @padHeight;
         }
 
         button
@@ -99,18 +83,18 @@ article.adroitJournal
             z-index: 800;
             opacity: 0.1;
         }
-        
+
         button:hover
         {
             opacity: 1.0;
         }
 
-        .sketchEraser
+        .drawEraser
         {
             cursor: crosshair !important;
         }
 
-        .sketchPen
+        .drawPen
         {
             /* cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAQCAYAAAAiYZ4HAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAECSURBVCiRjdGxK4VhFMfxj7vLYGBRoljsRkkWsjmDweRikJIs/golpUwy6T2bIpHdbrWYUGQ0voZ7b93e++L+6qmn55xvfc9zFEVxUxTFYlmW+jkNTOMuMx8zc8k/aeC9fZ/FfmY2+wG+cYIpnGXm3F/APS6xgzEM4DwzB38DrrHabuxkHEe1QES8YK+mtpGZy9XHgbIsQWZeYaVSf8NMRHx2K3WyiY8KMIrT6gwgIt6xXaMWmbnWo9RJZl5gvQJ9YTIivuqAITxpfTF84hgzWOsB2tCC1n5u8ay1owYOGz3drXkeEBjBbtesE7VAO/cY7tJajYitWqUutXkcoBkRr/ADVxd1Pg8/tMYAAAAASUVORK5CYII='), crosshair !important; */
             cursor: crosshair !important;

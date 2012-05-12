@@ -3,16 +3,16 @@
   // plugin options
   var opts;
 
-  $.fn.adroitJournal = function(options)
+  $.fn.linory = function(options)
     {
-      opts = $.extend({}, $.fn.adroitJournal.defaults, options);
+      opts = $.extend({}, $.fn.linory.defaults, options);
 
       return this.each(function()
        {
            var journal = this;
 
            // Get a title for the Journal
-           var journalId = opts.id; 
+           var journalId = opts.id;
 
            // Save the data upon leaving the page
            $(window).unload(function() { saveJournal(journal, journalId); });
@@ -64,20 +64,20 @@
       */
     function appendPage(journal, pageId, journalPageData)
     {
-        var section = 
+        var section =
             $('<section />').attr('id', pageId)
-                                     .addClass('designPad');
+                                     .addClass('pad');
 
         // section.append('<button alt="delete page">X</button>');
 
-        var bitMapLayer = 
+        var bitMapLayer =
             $('<canvas/>').addClass('bitmapLayer')
                                    .attr('width', opts.padWidth)
                                    .attr('height', opts.padHeight);
 
         section.append(bitMapLayer);
 
-        var textLayer = 
+        var textLayer =
             $('<div />').addClass('textLayer')
                               .attr('contentEditable', 'true');
 
@@ -85,12 +85,12 @@
 
 
         if(undefined != journalPageData)
-            section.designPad({padWidth: opts.padWidth,
+            section.pad({padWidth: opts.padWidth,
                                padHeight: opts.padHeight,
                                pageData: journalPageData});
         else
-            section.designPad({padWidth: opts.padWidth,
-                                          padHeight: opts.padHeight});
+            section.pad({padWidth: opts.padWidth,
+                        padHeight: opts.padHeight});
 
         $(journal).append(section);
     };
@@ -110,7 +110,7 @@
     function saveJournal(journal, journalId)
     {
         // Store journal meta-data
-        var journalData = 
+        var journalData =
             {
                 id: journalId,
                 title: $(journal).attr('title'),
@@ -118,8 +118,8 @@
             };
 
         // Fetch the data for each page
-        journalData.pages = 
-            $(journal).find('.designPad').designPadData();
+        journalData.pages =
+            $(journal).find('.pad').padData();
 
         var jsonImageData = JSON.stringify(journalData);
 
@@ -127,13 +127,12 @@
         localStorage.setItem(journalData.id, jsonImageData);
 
         history.pushState(journalData, journalId, journalId);
-        
     };
 
  })(jQuery);
 
 
-$.fn.adroitJournal.defaults =
+$.fn.linory.defaults =
 {
     minPageCount: 1,
     padWidth: 681,

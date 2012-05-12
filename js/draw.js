@@ -10,13 +10,13 @@ var cp =
 
 var tool = 'pen';
 
-$.fn.sketch = function(options)
+$.fn.draw = function(options)
 {
-  opts = $.extend({}, $.fn.sketch.defaults, options);
+  opts = $.extend({}, $.fn.draw.defaults, options);
 
   return this.each(function()
     {
-      $(this).addClass('sketch');
+      $(this).addClass('draw');
 
       // Load any image passed in
       if(null != opts.image)
@@ -66,14 +66,14 @@ function setTool(canvas,toolType)
     switch(toolType)
     {
     case 'pen':
-        $(canvas).removeClass('sketchEraser');
-        $(canvas).addClass('sketchPen');
+        $(canvas).removeClass('drawEraser');
+        $(canvas).addClass('drawPen');
         ctx.strokeStyle = opts.color;
         ctx.lineWidth = 2.2;
         break;
     case 'eraser':
-        $(canvas).removeClass('sketchPen');
-        $(canvas).addClass('sketchEraser');
+        $(canvas).removeClass('drawPen');
+        $(canvas).addClass('drawEraser');
         ctx.strokeStyle = opts.eraseColor;
         ctx.lineWidth = 10;
         break;
@@ -290,7 +290,7 @@ function getAbsolutePosition(element) {
 
  })(jQuery);
 
-$.fn.sketch.defaults =
+$.fn.draw.defaults =
 {
   name: 'defaultName',
   width: '381',
