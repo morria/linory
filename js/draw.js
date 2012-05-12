@@ -17,6 +17,7 @@ $.fn.draw = function(options)
   return this.each(function()
     {
       $(this).addClass('draw');
+      setTool(this, 'pen');
 
       // Load any image passed in
       if(null != opts.image)
@@ -44,6 +45,12 @@ $.fn.draw = function(options)
               });
     });
 };
+
+$.fn.setTool = function(tool) {
+    return this.each(function() {
+      setTool(this, tool);
+    });
+}
 
 function isIPhone()
 {
@@ -75,31 +82,20 @@ function setTool(canvas,toolType)
         $(canvas).removeClass('drawPen');
         $(canvas).addClass('drawEraser');
         ctx.strokeStyle = opts.eraseColor;
-        ctx.lineWidth = 10;
+        ctx.lineWidth = 15.0;
         break;
     }
 }
 
 function mouseMoveUnDrawListener(event)
 {
-    if(event.altKey)
-        setTool(event.currentTarget,'eraser');
-    else
-        setTool(event.currentTarget,'pen');
-
     cp.x1 = cp.y1 = cp.x2 = cp.y2 = null;
-
 }
 
- function mouseMoveDrawBListener(event)
+function mouseMoveDrawBListener(event)
 {
-  var canvas = event.currentTarget;
-  var ctx = canvas.getContext('2d');
-
-    if(event.altKey)
-        setTool(canvas,'eraser');
-    else
-        setTool(canvas,'pen');
+    var canvas = event.currentTarget;
+    var ctx = canvas.getContext('2d');
 
     if(null == cp.x1)
     {
@@ -120,8 +116,8 @@ function mouseMoveUnDrawListener(event)
         ctx.beginPath();
         ctx.moveTo(cp.x1, cp.y1);
         ctx.bezierCurveTo(cp.x1,cp.y1,
-                                      cp.x2,cp.y2,
-                                      event.offsetX,event.offsetY);
+                          cp.x2,cp.y2,
+                          event.offsetX,event.offsetY);
         cp.x1 = event.offsetX;
         cp.y1 = event.offsetY;
         cp.x2 = null;
@@ -136,28 +132,16 @@ function mouseMoveDrawListener(event)
   var canvas = event.currentTarget;
   var ctx = canvas.getContext('2d');
 
-  if(event.altKey)
-    setTool(canvas,'eraser');
-  else
-    setTool(canvas,'pen');
-
   var c = getRelativeCoordinates(event,canvas);
 
   var cx = c.x;
   var cy = c.y;
-
-  if('eraser' == tool)
-  {
-    ctx.clearRect(cx, cy,10,10);
-    return;
-  }
 
   if(null != cp.x1 && null != cp.y1)
   {
     ctx.beginPath();
     ctx.moveTo(cp.x1, cp.y1);
     ctx.quadraticCurveTo(cp.x1,cp.y1, cx, cy);
-    // ctx.lineTo(cx,cy);
     ctx.stroke();
     $(canvas).attr('data-nonempty',true);
   }
@@ -167,11 +151,6 @@ function mouseMoveDrawListener(event)
 
 function mouseDownListener(event)
 {
-    if(event.altKey)
-        setTool(event.currentTarget,'eraser');
-    else
-        setTool(event.currentTarget,'pen');
-
     $(event.currentTarget).select();
     $(event.currentTarget).unbind('mousemove');
     $(event.currentTarget).mousemove(mouseMoveDrawListener);
@@ -185,7 +164,6 @@ function mouseDownListener(event)
 
 function mouseUpListener(event)
 {
-    setTool(event.currentTarget,'pen');
     cp.x1 = cp.y1 = cp.x2 = cp.y2 = null;
     $(event.currentTarget).unbind('mousemove');
     $(event.currentTarget).unbind('touchmove');
@@ -202,12 +180,7 @@ function mouseLeaveListener(event)
 function mouseEnterListener(event)
 {
     cp.x1 = cp.y1 = null;
-
-    if(event.altKey)
-       setTool(event.currentTarget, 'eraser');
-    else
-        setTool(event.currentTarget,'pen');
-  };
+};
 
 function getRelativeCoordinates(event, reference) {
     var x, y;
@@ -218,7 +191,6 @@ function getRelativeCoordinates(event, reference) {
     {
       event = window.event.targetTouches[ 0 ];
       var position = getAbsolutePosition(reference);
-      console.log(position.x);
       return {x: (event.pageX - position.x),
               y: (event.pageY - position.y)};
     }
@@ -269,23 +241,23 @@ function getRelativeCoordinates(event, reference) {
     return { x: x, y: y };
   }
 
-/**
- * Retrieve the absolute coordinates of an element.
- *
- * @param element
- *   A DOM element.
- * @return
- *   A hash containing keys 'x' and 'y'.
- */
-function getAbsolutePosition(element) {
-  var r = { x: element.offsetLeft, y: element.offsetTop };
-  if (element.offsetParent) {
-    var tmp = getAbsolutePosition(element.offsetParent);
-    r.x += tmp.x;
-    r.y += tmp.y;
-  }
-  return r;
-};
+    /**
+    * Retrieve the absolute coordinates of an element.
+    *
+    * @param element
+    *   A DOM element.
+    * @return
+    *   A hash containing keys 'x' and 'y'.
+    */
+    function getAbsolutePosition(element) {
+    var r = { x: element.offsetLeft, y: element.offsetTop };
+    if (element.offsetParent) {
+        var tmp = getAbsolutePosition(element.offsetParent);
+        r.x += tmp.x;
+        r.y += tmp.y;
+    }
+    return r;
+    };
 
 
  })(jQuery);

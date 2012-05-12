@@ -463,7 +463,7 @@ AddCharset utf-8 .css .js .xml .json .rss .atom
   RewriteCond %{SCRIPT_FILENAME} -f
   RewriteRule "(^|/)\." - [F]
 
-  RewriteRule ^l(.+)$ /index.php?id=$1 [L,NC,QSA]
+  RewriteRule ^0(.+)$ /index.php?id=$1 [L,NC,QSA]
 </IfModule>
 
 

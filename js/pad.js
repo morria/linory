@@ -68,13 +68,12 @@
       */
     function restoreData(pad, pageData)
     {
-        $(pad).find('.textLayer').html(pageData.text);
-
+        // $(pad).find('.textLayer').html(pageData.text);
         $(pad).find('canvas').draw({image: pageData.bitMap,
-                                            width: opts.padWidth,
-                                            height: opts.padHeight,
-                                            color: 'rgba(0,0,0,0.55)',
-                                            eraseColor: 'rgba(255,255,255,1.0)' });
+                                    width: opts.padWidth,
+                                    height: opts.padHeight,
+                                    color: 'rgba(0,0,0,0.55)',
+                                    eraseColor: 'rgba(255,255,255,1.0)' });
     };
 
     function initializeEmptyPad(pad)
