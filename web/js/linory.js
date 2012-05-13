@@ -99,8 +99,11 @@
           if('undefined' !== typeof onSuccess) {
             onSuccess(event);
           }
-          var path = location.href + '.png';
-          _updateThumbnail(path);
+
+          if(_getPadId()) {
+              var path = location.href + '.png';
+              _updateThumbnail(path);
+          }
           $('#og_image').attr('content', path);
         });
     };
@@ -114,6 +117,7 @@
 
     function _updateThumbnail(bitMap) {
         THUMBNAIL.attr('src', bitMap);
+        THUMBNAIL.parent().attr('href', bitMap);
     };
 
     function _savePadDataRemote(padData, onSuccess) {

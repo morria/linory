@@ -7,6 +7,9 @@
   $im = imagecreatefromstring($raw);
   if ($im !== false) {
       header('Content-Type: image/png');
+      if($_GET['download']) {
+          header('Content-disposition: attachment; filename=linory.png');
+      }
       imagepng($im);
       imagedestroy($im);
   }

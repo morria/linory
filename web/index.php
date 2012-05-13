@@ -1,4 +1,9 @@
-<!doctype html>
+<?php
+    $imageUrl = null;
+    if($_GET['id']) {
+        $imageUrl = '/' . $_GET['id'] . '.png';
+    }
+?><!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
@@ -44,26 +49,28 @@
             </div>
         </div>
         <div id="linory"></div>
-        <div id="share" class="section">
-            <h2>Share</h2>
-            <ul>
-            <li><a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-lang="en" data-hashtags="linory" data-related="asmorrison" data-text="I made this">Tweet</a></li>
-            <li><div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div></li>
-            <li><div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div></li>
-            </ul>
-        </div>
-        <div id="preview" class="section">
-            <h2>Drag to Save</h2>
-            <a href="<?php print $_SERVER['REQUEST_URI']; ?>.png">
-            <img id="thumbnail" height="98" width="130" draggable="true" src="<?php print $_SERVER['REQUEST_URI']; ?>.png" />
-            </a>
-        </div>
+
+
     </div>
 
-    <footer>
-        <div id="by">linory, by asm</div>
-        <div id="about">
-            <a href="https://twitter.com/#!/search/%23linory">See sketches on Twitter</a>. <a href="http://github.com/morria/linory">See the code on GitHub</a>.
+    <footer class="section">
+        <div id="preview">
+            <a href="<?php print $imageUrl ?>">
+              <img id="thumbnail" height="75" width="100" draggable="true" src="<?php print $imageUrl; ?>" />
+            </a>
+        </div>
+        <div id="right">
+            <ul id="share">
+                <li><a href="https://twitter.com/share" class="twitter-share-button" data-size="medium" data-count="horizontal" data-lang="en" data-hashtags="linory" data-related="asmorrison" data-text="I made this">Tweet</a></li>
+                <li><div class="fb-like" data-send="false" data-layout="button_count" data-width="200" data-show-faces="false" data-font="arial"></div></li>
+                <li><div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div></li>
+            </ul>
+            <div id="about">
+                <div id="by"><a href="http://Linory.com">Linory</a>, by <a href="http://github.com/morria">Andrew Morrison</a></div>
+                <div id="more">
+                    <a href="https://twitter.com/#!/search/%23linory">See sketches on Twitter</a>. <a href="http://github.com/morria/linory">See code on GitHub</a>.
+                </div>
+            </div>
         </div>
     </footer>
 
