@@ -11,8 +11,11 @@
   <meta name="viewport" content="width=device-width">
 
   <meta property="og:title" content="linory" />
+  <meta property="og:type" content="website" />
   <meta property="og:description" content="draw and share sketches">
-  <meta property="og:img" content="thumbnail" />
+  <meta property="og:site_name" content="linory" />
+  <meta property="fb:admins" content="209372" />
+  <meta property="og:image" content="thumbnail" />
   <meta itemprop="name" content="linory">
   <meta itemprop="description" content="draw and share sketches">
 
@@ -44,15 +47,16 @@
         <div id="share" class="section">
             <h2>Share</h2>
             <ul>
-            <li><a href="https://twitter.com/share?count=0" class="twitter-share-button" data-lang="en" data-hashtag="#linory">Tweet</a></li>
-            <li><div class="fb-like" data-send="true" data-width="100" data-show-faces="false" data-action="recommend" data-font="arial"></div></li>
-            <li contenteditable="true">Link</li>
-            <li<g:plusone size="small" annotation="inline"></g:plusone></li>
+            <li><a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-lang="en" data-hashtags="linory" data-related="asmorrison" data-text="I made this">Tweet</a></li>
+            <li><div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div></li>
+            <li><div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div></li>
             </ul>
         </div>
         <div id="preview" class="section">
             <h2>Drag to Save</h2>
-            <img id="thumbnail" src="img/bg.png" alt="Drag me to save" />
+            <a href="<?php print $_SERVER['REQUEST_URI']; ?>.png">
+            <img id="thumbnail" height="98" width="130" draggable="true" src="<?php print $_SERVER['REQUEST_URI']; ?>.png" />
+            </a>
         </div>
     </div>
 
@@ -66,8 +70,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
     <script src="js/plugins.js"></script>
-    <script src="js/script.js"></script>
-
     <script type="text/javascript" src="js/libs/keymaster.min.js"></script>
     <script type="text/javascript" src="js/pad.js"></script>
     <script type="text/javascript" src="js/draw.js"></script>
@@ -90,23 +92,21 @@
 
     <!-- Facebook -->
     <div id="fb-root"></div>
-    <script>
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=171005193026735";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=171005193026735";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
     <!-- Google Plus -->
     <script type="text/javascript">
-    (function() {
-            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/plusone.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                    })();
+        (function() {
+           var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+           po.src = 'https://apis.google.com/js/plusone.js';
+           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
     </script>
 </body>
 </html>

@@ -96,15 +96,24 @@
 
         _savePadDataRemote(padData, function(event) {
           history.pushState(null, padData.id, padData.id);
-          _updateThumbnail(padData.pad.bitMap);
           if('undefined' !== typeof onSuccess) {
             onSuccess(event);
           }
+          var path = location.href + '.png';
+          _updateThumbnail(path);
+          $('#og_image').attr('content', path);
         });
     };
 
+    function _onCanvasChange(event) {
+        var pad= PAD.find('.pad').padData()
+        if(pad && pad.bitMap) {
+          _updateThumbnail(pad.bitMap);
+        }
+    };
+
     function _updateThumbnail(bitMap) {
-        THUMBNAIL.attr('src', padData.pad.bitMap);
+        THUMBNAIL.attr('src', bitMap);
     };
 
     function _savePadDataRemote(padData, onSuccess) {
@@ -161,6 +170,9 @@
                       .attr('height', padHeight);
       section.append(bitMapLayer);
 
+      CANVAS.bind('change', _onCanvasChange);
+      _onCanvasChange(null);
+
       /*
       var textLayer =
         $('<div />').addClass('textLayer')
@@ -179,4 +191,3 @@
     };
   })();
 })(jQuery);
-

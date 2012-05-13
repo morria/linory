@@ -176,6 +176,8 @@ h1, h2, h3 {
 .section {
     color: #fff;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    width: 48%;
+    float: left;
 
     margin-top: 100px;
     margin-bottom: 100px;
@@ -185,15 +187,24 @@ h1, h2, h3 {
 }
 
 #share {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+        display: inline;
+    }
+  }
 
 }
 
 #preview {
   img {
-    height: 150px;
-    width: 200px;
+    height: 98px;
+    width: 130px;
     background-color: #fff;
-    display: block;
+    display: inline-block;
     background-color: #fff;
     opacity: 0.9;
     .boxShadow(0px, 0px, 7px, #aaa);
