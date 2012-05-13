@@ -62,8 +62,8 @@
         <div id="right">
             <ul id="share">
                 <li><a href="https://twitter.com/share" class="twitter-share-button" data-size="medium" data-count="horizontal" data-lang="en" data-hashtags="linory" data-related="asmorrison" data-text="I made this">Tweet</a></li>
-                <li><div class="fb-like" data-send="false" data-layout="button_count" data-width="200" data-show-faces="false" data-font="arial"></div></li>
-                <li><div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div></li>
+                <li><div class="fb-like" data-send="false" data-layout="button_count" data-width="130" data-show-faces="false" data-font="arial"></div></li>
+                <li><div class="g-plusone" data-size="medium"></div></li>
             </ul>
             <div id="about">
                 <div id="by"><a href="http://Linory.com">Linory</a>, by <a href="http://github.com/morria">Andrew Morrison</a></div>
@@ -109,11 +109,11 @@
 
     <!-- Google Plus -->
     <script type="text/javascript">
-        (function() {
-           var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-           po.src = 'https://apis.google.com/js/plusone.js';
-           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-        })();
+      (function() {
+              var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                  po.src = 'https://apis.google.com/js/plusone.js';
+                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                    })();
     </script>
 </body>
 </html>

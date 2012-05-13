@@ -71,13 +71,15 @@
     };
 
     function _onButtonSaveClick(event) {
-        BUTTON_SAVE.addClass('throb');
-        _savePadData(function(event) {
-          BUTTON_SAVE.removeClass('throb'); 
-          if(!localStorage.getItem('inhibit_box_saved')) {
-             BOX_SAVED.removeClass('hidden');
-          }
-        });
+        if(CANVAS.attr('data-nonempty')) {
+            BUTTON_SAVE.addClass('throb');
+            _savePadData(function(event) {
+            BUTTON_SAVE.removeClass('throb'); 
+            if(!localStorage.getItem('inhibit_box_saved')) {
+                BOX_SAVED.removeClass('hidden');
+            }
+            });
+        }
     };
 
     function _getPadId() {
@@ -94,7 +96,8 @@
           pad: PAD.find('.pad').padData()
         };
 
-        _savePadDataRemote(padData, function(event) {
+        _savePadDataRemote(padData, function(data) {
+
           history.pushState(null, padData.id, padData.id);
           if('undefined' !== typeof onSuccess) {
             onSuccess(event);

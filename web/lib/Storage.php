@@ -49,11 +49,11 @@ class Storage {
 
         if($response->status != 200) {
             $this->reply($response->status,
-                array('id' => $id, 'success' => false, 'response' => $response));
+                array('id' => $id, 'success' => false));
         }
         else {
             $this->reply(self::STATUS_OK,
-                array('id' => $id, 'success' => true, 'response' => $response, 'filename' => $filename));
+                array('id' => $id, 'success' => true));
         }
     }
 
