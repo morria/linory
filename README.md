@@ -1,12 +1,15 @@
-Draw sketches and share them with your friends.
+Linory
+======
 
-See http://linory.com/
+Draw sketches and share them with your friends. Hosted at http://linory.com/.
 
 
 Installation
 ============
 
-1. yum install php-amazon-sdk php-gd
-2. Create /etc/httpd/conf.d/linory.conf
-3. Add your AWS credentails to /usr/share/pear/AWSSDKforPHP/config.inc.php
-4. Add "include_path = '.:/usr/share/pear/AWSSDKforPHP'" to /etc/php.ini
+1. git clone git@github.com:morria/linory.git /var/www/linory
+2. yum install php-amazon-sdk php-gd
+3. cp conf/linory.conf /etc/httpd/conf.d/linory.conf
+4. Add your AWS credentails to /usr/share/pear/AWSSDKforPHP/config.inc.php
+5. Add "include_path = '.:/usr/share/pear/AWSSDKforPHP'" to /etc/php.ini
+6. sudo /etc/init.d/httpd restart
