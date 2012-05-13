@@ -34,19 +34,18 @@
       */
     $.fn.padData = function()
     {
-        var padData = new Array();
+        var padData = null;
 
         this.each(function()
         {
             var pad = this;
-
             if($(pad).find('canvas').attr('data-nonempty') ||
-               $(pad).find('.textLayer').html())
-                padData.push(
-                    {
-                        bitMap: $(pad).find('canvas').get(0).toDataURL(),
-                        text: $(pad).find('.textLayer').html()
-                    });
+               $(pad).find('.textLayer').html()) {
+              padData = {
+                bitMap: $(pad).find('canvas').get(0).toDataURL()
+                // text: $(pad).find('.textLayer').html()
+              };
+            }
         });
 
         return padData;

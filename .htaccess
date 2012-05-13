@@ -463,6 +463,10 @@ AddCharset utf-8 .css .js .xml .json .rss .atom
   RewriteCond %{SCRIPT_FILENAME} -f
   RewriteRule "(^|/)\." - [F]
 
+  # Set the ID of the howto here
+  RewriteRule ^howto/?$ /index.php?id=0OTUwODA [L,NC,QSA]
+  RewriteRule ^storage/get/howto$ /storage.php?action=get&id=0OTUwODA [L,NC,QSA]
+
   RewriteRule ^(0.+).png$ /image.php?id=$1 [L,NC,QSA]
   RewriteRule ^(0.+)$ /index.php?id=$1 [L,NC,QSA]
   RewriteRule ^storage/(.+)/(.+)/?$ /storage.php?action=$1&id=$2 [L,NC,QSA]

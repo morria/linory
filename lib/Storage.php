@@ -34,13 +34,16 @@ class Storage {
         $blob = file_get_contents("php://input");
 
         // Don't store anything if we don't have data
-        if(strlen($blob) < 1) {
+        if(strlen($blob) < 1 ||
+           strlen($blob) > 1048576) {
             $this->reply(500, array('id' => $id, 'success' => false));
         }
 
+        $filename = $this->getFilenameForId($id);
+
         $response =
             $this->amazonS3->create_object(self::BUCKET_NAME,
-                $this->getFilenameForId($id),
+                $filename,
                 array('body' => $blob,
                       'contentType' => 'application/json'));
 
@@ -50,7 +53,7 @@ class Storage {
         }
         else {
             $this->reply(self::STATUS_OK,
-                array('id' => $id, 'success' => true));
+                array('id' => $id, 'success' => true, 'response' => $response, 'filename' => $filename));
         }
     }
 

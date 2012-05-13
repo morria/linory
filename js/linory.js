@@ -6,8 +6,11 @@
     var BUTTON_ERASER = $('#eraser-button');
     var BUTTON_NEW = $('#new-button');
     var BUTTON_SAVE = $('#save-button');
+    var BUTTON_HOWTO = $('#howto-button');
     var PAD = $('#linory');
     var CANVAS = null;
+    var BOX_SAVED = $('#saved-box');
+    var THUMBNAIL = $('#thumbnail');
 
     _initialize();
 
@@ -21,12 +24,30 @@
         BUTTON_ERASER.click(_onButtonEraserClick);
         BUTTON_NEW.click(_onButtonNewClick);
         BUTTON_SAVE.click(_onButtonSaveClick);
+        BUTTON_HOWTO.click(_onButtonHowtoClick);
+        BOX_SAVED.click(_onBoxSavedClick);
+
+        key('ctrl+p', _onButtonPenClick);
+        key('ctrl+e', _onButtonEraserClick);
+        key('ctrl+n', _onButtonNewClick);
+        key('ctrl+s', _onButtonSaveClick);
 
         window.onpopstate = _onPopState;
     };
 
+    function _onButtonHowtoClick(event) {
+        _savePadData(function(event) {
+            history.pushState(null, 'linory', '/howto');
+            _setupPad();
+        });
+    };
+
+    function _onBoxSavedClick(event) {
+        BOX_SAVED.addClass('hidden');
+        localStorage.setItem('inhibit_box_saved', true);
+    };
+
     function _onPopState(event) {
-        console.log(event);
         _setupPad();
     };
 
@@ -43,17 +64,20 @@
     };
 
     function _onButtonNewClick(event) {
-        _savePadData();
-        history.pushState(null, 'linory', '/');
-        _setupPad();
+        _savePadData(function(event) {
+            history.pushState(null, 'linory', '/');
+            _setupPad();
+        });
     };
 
     function _onButtonSaveClick(event) {
-        // setup spinner
-        _savePadData();
-        // save the pad
-        // push state
-        // stop the spinner
+        BUTTON_SAVE.addClass('throb');
+        _savePadData(function(event) {
+          BUTTON_SAVE.removeClass('throb'); 
+          if(!localStorage.getItem('inhibit_box_saved')) {
+             BOX_SAVED.removeClass('hidden');
+          }
+        });
     };
 
     function _getPadId() {
@@ -64,29 +88,28 @@
         return '0' + btoa(Math.random()*10000000).slice(0, 7);
     }
 
-    function _savePadData() {
+    function _savePadData(onSuccess) {
         var padData = {
-          id: _getPadId() ? _getPadId() : _generatePadId(),
-          page: PAD.find('.pad').padData()
+          id: _generatePadId(),
+          pad: PAD.find('.pad').padData()
         };
 
-        var jsonPadData = JSON.stringify(padData);
-
-        _savePadDataRemote(function(event) {
+        _savePadDataRemote(padData, function(event) {
           history.pushState(null, padData.id, padData.id);
+          _updateThumbnail(padData.pad.bitMap);
+          if('undefined' !== typeof onSuccess) {
+            onSuccess(event);
+          }
         });
     };
 
-    function _savePadDataRemote(onSuccess) {
-        var padData = {
-          id: _getPadId() ? _getPadId() : _generatePadId(),
-          page: PAD.find('.pad').padData()
-        };
+    function _updateThumbnail(bitMap) {
+        THUMBNAIL.attr('src', padData.pad.bitMap);
+    };
 
-        var jsonPadData = JSON.stringify(padData);
-
+    function _savePadDataRemote(padData, onSuccess) {
         $.ajax('/storage/put/' + padData.id, {
-          data: jsonPadData,
+          data: JSON.stringify(padData),
           dataType: 'json',
           type: 'POST',
           contentType: 'application/json',
@@ -104,8 +127,8 @@
         var padHeight = PAD.css('height').replace('px', '');
         if(_getPadId()) {
             _getPadDataRemote(_getPadId(), function(data) {
-              if(data && data.page && data.page[0]) {
-                _initializePad(padWidth, padHeight, data.page[0]);
+              if(data && data.pad) {
+                _initializePad(padWidth, padHeight, data.pad);
               }
             });
         }
@@ -151,6 +174,7 @@
         pageData: padData
       });
 
+      CANVAS.setTool('pen');
       PAD.empty().append(section);
     };
   })();

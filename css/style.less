@@ -96,6 +96,11 @@ h1, h2, h3 {
     padding-left: 22px;
   }
 
+  .howto {
+    background-image: url('../img/howto.png');
+    padding-left: 35px;
+  }
+
   .new {
     background-image: url('../img/new.png');
     padding-left: 37px;
@@ -179,6 +184,10 @@ h1, h2, h3 {
     }
 }
 
+#share {
+
+}
+
 #preview {
   img {
     height: 150px;
@@ -198,4 +207,61 @@ footer {
     text-align: center;
     width: @padWidth;
     margin: 10px auto;
+}
+
+.throb {
+  -webkit-animation: throbOut 0.8s infinite;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:quadratic;
+}
+@-webkit-keyframes throbOut {
+   from {-webkit-transform:scale(1.0)}
+   to {-webkit-transform:scale(0.75)}
+}
+
+.hidden {
+    display: none;
+}
+
+.arrow-box {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 300px;
+  z-index: 200;
+  background: #333;
+  border: 1px solid #aaa;
+  padding: 20px;
+  .roundedCorners(8px);
+  color: #fff;
+  cursor: pointer;
+
+  h2 {
+    font-size: 14pt;
+    font-weight: normal;
+    padding: 0;
+    margin: 0 0 10px 0;
+  }
+}
+.arrow-box:after, .arrow-box:before {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow-box:after {
+  border-bottom-color: #333;
+  border-width: 20px;
+  left: 50%;
+  margin-left: -20px;
+}
+.arrow-box:before {
+  border-bottom-color: #aaa;
+  border-width: 21px;
+  left: 50%;
+  margin-left: -21px;
 }
