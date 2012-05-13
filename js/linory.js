@@ -72,26 +72,60 @@
 
         var jsonPadData = JSON.stringify(padData);
 
-        localStorage.setItem(padData.id, jsonPadData);
-        history.pushState(null, padData.id, padData.id);
+        _savePadDataRemote(function(event) {
+          history.pushState(null, padData.id, padData.id);
+        });
+    };
+
+    function _savePadDataRemote(onSuccess) {
+        var padData = {
+          id: _getPadId() ? _getPadId() : _generatePadId(),
+          page: PAD.find('.pad').padData()
+        };
+
+        var jsonPadData = JSON.stringify(padData);
+
+        $.ajax('/storage/put/' + padData.id, {
+          data: jsonPadData,
+          dataType: 'json',
+          type: 'POST',
+          contentType: 'application/json',
+          error: _onSavePadDataRemoteError,
+          success: onSuccess 
+        });
+    };
+
+    function _onSavePadDataRemoteError(event) {
+        console.log(event);
     };
 
     function _setupPad() {
         var padWidth = PAD.css('width').replace('px', '');
         var padHeight = PAD.css('height').replace('px', '');
-        var padData = null;
-
         if(_getPadId()) {
-            padData = JSON.parse(localStorage.getItem(_getPadId()));
-            if(padData && padData.page && padData.page[0]) {
-                padData = padData.page[0];
-            }
-            else {
-                padData = null;
-            }
+            _getPadDataRemote(_getPadId(), function(data) {
+              if(data && data.page && data.page[0]) {
+                _initializePad(padWidth, padHeight, data.page[0]);
+              }
+            });
         }
+        else {
+          _initializePad(padWidth, padHeight, null);
+        }
+    };
 
-        _initializePad(padWidth, padHeight, padData);
+    function _getPadDataRemote(padId, onSuccess) {
+        $.ajax('/storage/get/' + _getPadId(), {
+          dataType: 'json',
+          type: 'GET',
+          cache: true,
+          error: _onGetPadDataRemoteError,
+          success: onSuccess
+        });
+    };
+
+    function _onGetPadDataRemoteError(event) {
+        console.log(event);
     };
 
     function _initializePad(padWidth, padHeight, padData) {

@@ -28,6 +28,11 @@ $.fn.draw = function(options)
         image.onload = function() { ctx.drawImage(image,0,0,opts.width,opts.height); };
         image.src = opts.image;
       }
+      else {
+        var ctx = this.getContext('2d');
+        ctx.fillStyle = "rgb(255,255,255)";
+        ctx.fillRect(0, 0, opts.width, opts.height);  
+      }
 
       // Hook up event listeners
       $(this).mousedown(mouseDownListener);

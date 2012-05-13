@@ -463,7 +463,9 @@ AddCharset utf-8 .css .js .xml .json .rss .atom
   RewriteCond %{SCRIPT_FILENAME} -f
   RewriteRule "(^|/)\." - [F]
 
-  RewriteRule ^0(.+)$ /index.php?id=$1 [L,NC,QSA]
+  RewriteRule ^(0.+).png$ /image.php?id=$1 [L,NC,QSA]
+  RewriteRule ^(0.+)$ /index.php?id=$1 [L,NC,QSA]
+  RewriteRule ^storage/(.+)/(.+)/?$ /storage.php?action=$1&id=$2 [L,NC,QSA]
 </IfModule>
 
 
