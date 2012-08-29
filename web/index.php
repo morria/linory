@@ -68,7 +68,7 @@
             <div id="about">
                 <div id="by"><a href="http://Linory.com">Linory</a>, by <a href="http://github.com/morria">Andrew Morrison</a></div>
                 <div id="more">
-                    <a href="https://twitter.com/#!/search/%23linory">See sketches on Twitter</a>. <a href="http://github.com/morria/linory">See code on GitHub</a>.
+                    <a href="http://github.com/morria/linory">See code on GitHub</a>.
                 </div>
             </div>
         </div>
