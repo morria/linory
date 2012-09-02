@@ -465,6 +465,7 @@ AddCharset utf-8 .css .js .xml .json .rss .atom
 
   # Set the ID of the howto here
   RewriteRule ^howto/?$ /index.php?id=0MzE2Nzk [L,NC,QSA]
+  RewriteRule ^howto.png?$ /0MzE2Nzk.png [L,NC,QSA]
   RewriteRule ^storage/get/howto$ /storage.php?action=get&id=0MzE2Nzk [L,NC,QSA]
 
   RewriteRule ^(0.+).png$ /image.php?id=$1 [L,NC,QSA]
