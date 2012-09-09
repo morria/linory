@@ -100,7 +100,7 @@
 
           history.pushState(null, padData.id, padData.id);
           if('undefined' !== typeof onSuccess) {
-            onSuccess(event);
+            onSuccess(data);
           }
 
           if(_getPadId()) {
